@@ -1,0 +1,21 @@
+{
+  "name": "trivia-night",
+  "version": "1.0.0",
+  "description": "jeopardy style game w/ multiple players",
+  "main": "index.js",
+  "scripts": {
+    "server-dev": "nodemon server/index.js",
+    "react-dev": "webpack -d --watch",
+    "build": "webpack --mode \"production\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omenwolf/trivia-night.git"
+  },
+  "author": "Marc Benedict L. Choa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omenwolf/trivia-night/issues"
+  },
+  "homepage": "https://github.com/omenwolf/trivia-night#readme"
+}
