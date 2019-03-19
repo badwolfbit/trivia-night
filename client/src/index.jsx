@@ -14,132 +14,67 @@ class App extends React.Component {
       type: "",
       difficulty: "",
       incorrect_answers: "",
-      correct_answer: ""
-      // randomized_choices: ""
+      correct_answer: "",
+      button_color: "btn-light"
     };
     this.getData = this.getData.bind(this);
-    // this.handleQuestions = this.handleQuestions.bind(this);
+    this.players_choice = this.players_choice.bind(this);
+    this.layout_reset = this.layout_reset.bind(this)
   }
   componentDidMount() {
     this.getData();
-    // this.handleQuestions();
   }
 
   getData() {
-    // API Request
-    axios
-      .get(`https://opentdb.com/api.php?amount=1`)
-      .then(response => {
-        let API_data = response.data.results[0];
-        console.log(response.data.results);
-        // refactor this later
-        let API_category = API_data.category;
-        let API_question = API_data.question;
-        let API_type = API_data.type;
-        let API_difficulty = API_data.difficulty;
-        let API_answer = API_data.correct_answer;
-        let API_incorrect_answers = API_data.incorrect_answers; //returns an array of incorrect suggestions
-        console.log(API_incorrect_answers);
-        console.log(API_answer);
-        let interviewQ = [];
-
-        if (API_type === "multiple") {
-          let randomize = [];
-          // take all answers
-          randomize.push(API_answer);
-          API_incorrect_answers.forEach(answer => {
-            randomize.push(answer);
-            // console.log(answer)
-          });
-
-          var shuffle = function(array) {
-            var currentIndex = array.length;
-            var temporaryValue, randomIndex;
-
-            while (0 !== currentIndex) {
-              randomIndex = Math.floor(Math.random() * currentIndex);
-              currentIndex -= 1;
-
-              temporaryValue = array[currentIndex];
-              array[currentIndex] = array[randomIndex];
-              array[randomIndex] = temporaryValue;
-            }
-            return array;
-          };
-          let full_randomized = shuffle(randomize);
-
-          this.setState({ randomized_choices: full_randomized });
-        } else if (API_type === "boolean") {
-          this.setState({ randomized_choices: ["true", "false"] });
-        }
-
-        let API_question_quoteOmit = API_question.replace(/&quot;/g, '"'); //factoring out &quote; statements to be ""
+    axios.get(`/question`)
+      .then(({ data }) => {
+        console.log(data);
         this.setState({
-          question: API_question_quoteOmit,
-          category: API_category,
-          type: API_type,
-          difficulty: API_difficulty,
-          incorrect_answers: API_incorrect_answers, //returns an array of incorrect suggestions
-          correct_answer: API_answer
+          question: data.question,
+          category: data.category,
+          type: data.type,
+          difficulty: data.difficulty,
+          choices: data.choices, //array
+          correct_answer: data.correct_answer
         });
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
-  // handleQuestions() {
-  //   // output array
-  //   let output = [];
+  players_choice(e){
+    e.preventDefault();
+    if(e.target.dataset.choice === this.state.correct_answer){
+      // add points based on difficulty to current player
+      // point system (ADD)
+        // easy - 200pts
+        // medium - 400pts
+        // hard - 800pts
+      this.setState({button_color: "btn-success"})
+      
+    } else {
+      // negate points based on difficulty to current player
+      // point system (NEGATE)
+        // easy - 200pts
+        // medium - 400pts
+        // hard - 800pts
+      this.setState({button_color: "btn-danger"})
+    }
+    
+    // after click switch to next player && request new question
+    setTimeout(() => {this.getData(), this.layout_reset()}, 1000) //currently changing questions, next is players
+  }
 
-  //   // if multiple choice
-  //   if (this.state.type === "multiple") {
-  //     let randomize = [];
-  //     // take all answers
-  //     randomize.push(this.state.API_answer);
-  //     this.state.incorrect_answers.forEach(answer => {
-  //       randomize.push(answer);
-  //       // console.log(answer)
-  //     });
-  //     this.setState({ randomized_choices: randomize });
-
-  // #############################################################################
-  // var shuffle = function(array) {
-  //   var currentIndex = array.length;
-  //   var temporaryValue, randomIndex;
-
-  //   while (0 !== currentIndex) {
-  //     randomIndex = Math.floor(Math.random() * currentIndex);
-  //     currentIndex -= 1;
-
-  //     temporaryValue = array[currentIndex];
-  //     array[currentIndex] = array[randomIndex];
-  //     array[randomIndex] = temporaryValue;
-  //   }
-  //   return array;
-  // };
-  // #############################################################################
-
-  // randomize then
-  // let randomized_choices = shuffle(randomize);
-  // push them to output array & return
-  // randomized_choices.forEach((rando_answer) => {output.push(rando_answer)})
-  // randomized.forEach((rando_answer) => {
-  //   output.push(rando_answer)
-  // })
-  // } else if (this.state.type === "boolean") {
-  //   this.setState({ randomized_choices: ["true", "false"] });
-  // }
-
-  // if boolean choice
-  // push "true" or "false" in output array & return
-  // }
+  layout_reset(){
+    this.setState({
+      button_color: "btn-light"
+    })
+  }
 
   render() {
     return (
       <Fragment>
-        {/* {console.log("Choices:", this.state.randomized_choices)} */}
-        {/* {console.log(this.state.type)} */}
         <div className="title-bar navbar navbar-dark bg-dark shadow-sm">
-          <h3>trivia</h3>
+          <h3>.trivia</h3>
         </div>
         <div className="main">
           <section className="jumbotron text-center trivia-field">
@@ -149,29 +84,13 @@ class App extends React.Component {
               </div>
 
               <div className="options">
-                <TriviaChoices choices={this.state.randomized_choices} />
-                {/* <ul>
-              <li>{this.state.randomized_choices[0]}</li>
-              <li>{this.state.randomized_choices[1]}</li>
-              <li>{this.state.randomized_choices[2]}</li>
-              <li>{this.state.randomized_choices[3]}</li>
-            </ul> */}
+                <TriviaChoices options={this.state.choices} chosen={this.players_choice} btn_color={this.state.button_color}/>
               </div>
             </div>
           </section>
           <div className="container">
-            <Players />
+            <Players question_level={this.state.difficulty}/>
           </div>
-
-          <Suspense fallback={<div>Loading...</div>}>
-            {/* <div>
-            <ul>
-              {this.state.randomized_choices.map(item => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          </div> */}
-          </Suspense>
         </div>
       </Fragment>
     );

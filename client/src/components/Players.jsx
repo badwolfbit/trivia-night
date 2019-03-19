@@ -6,6 +6,7 @@ class Players extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      names: ['orange', 'blurple']
 
     };
 
@@ -19,7 +20,11 @@ class Players extends React.Component {
   render() {
     return (
       <div className="row">
-        Player Section
+        <div>
+          {this.state.names.map((name) => (
+            <li>{name}</li>
+          ))}
+        </div>
       </div>
     );
   }

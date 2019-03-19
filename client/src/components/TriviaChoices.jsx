@@ -4,20 +4,27 @@ import ReactDOM from "react-dom";
 class TriviaChoices extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      
-    };
+    this.state = {};
   }
   componentDidMount() {}
 
   render() {
     return (
       <div className="row">
-        {/* asynchronously await for full data then render */}
-        <ul>
-          <li>{this.props.choices}</li>
-        </ul>
-        {console.log(this.props.choices)}
+        {this.props.options
+          ? this.props.options.map((choice, i) => (
+              <button
+                type="button"
+                className={`btn ${this.props.btn_color} btn-lg btn-block`}
+                key={i}
+                onClick={e => this.props.chosen(e, i)}
+                data-choice={choice}
+              >
+                {choice}
+              </button>
+            ))
+          : "loading..."}
+        {this.props.options ? console.log(this.props.options) : null}
       </div>
     );
   }

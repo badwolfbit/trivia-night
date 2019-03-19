@@ -6,6 +6,8 @@
   /* margin: 0 !important; */
   text-decoration: none;
   /* font-size: 17px; */
+  animation-name: bar;
+  animation-duration: 0.4s;
 }
 
 .trivia-field{
@@ -19,3 +21,4 @@
 body{
   font-family: Arial, Helvetica, sans-serif;
 }
+
