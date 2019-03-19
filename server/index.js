@@ -42,16 +42,13 @@ app.get("*.js", function(req, res, next) {
 // trivia API request & handling
 app.get("/question", (req, res) => {
   axios.get(`https://opentdb.com/api.php?amount=1`).then(response => {
-    // res.send(response.data)
-    // console.log(response.data.results[0]);
     let API_data = response.data.results[0];
     trivia_data = API_formatter(API_data)
     res.send(trivia_data)
-    // res.send an object containing formatted API
   });
 });
 
-let API_formatter = function(API_data/* needs API input */) {
+let API_formatter = function(API_data) {
   let output = {}
 
   // direct deposit

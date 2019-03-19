@@ -3,7 +3,9 @@ import ReactDOM from "react-dom";
 import TriviaQuestion from "./components/TriviaQuestion.jsx";
 import TriviaChoices from "./components/TriviaChoices.jsx";
 import Players from "./components/Players.jsx";
+import Highscores from "./components/Highscores.jsx";
 import axios from "axios";
+import Switch from "react-switch";
 
 class App extends React.Component {
   constructor(props) {
@@ -15,11 +17,13 @@ class App extends React.Component {
       difficulty: "",
       incorrect_answers: "",
       correct_answer: "",
-      button_color: "btn-light"
+      button_color: "btn-light",
+      checked: false
     };
     this.getData = this.getData.bind(this);
     this.players_choice = this.players_choice.bind(this);
     this.layout_reset = this.layout_reset.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
     this.getData();
@@ -42,14 +46,25 @@ class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  handleChange(checked) {
+    this.setState({ checked });
+  }
+
   players_choice(e) {
     e.preventDefault();
     if (e.target.dataset.choice === this.state.correct_answer) {
       // add points based on difficulty to current player
       // point system (ADD)
-      // easy - 200pts
-      // medium - 400pts
-      // hard - 800pts
+      if(this.state.difficulty === "easy"){
+        // easy - 200pts
+        this.setState({})
+      } else if (this.state.difficulty === "medium"){
+        // medium - 400pts
+        this.setState({})
+      } else if (this.state.difficulty === "hard"){
+        // hard - 800pts
+        this.setState({})
+      }
       this.setState({ button_color: "btn-success" });
     } else {
       // negate points based on difficulty to current player
@@ -75,8 +90,13 @@ class App extends React.Component {
   render() {
     return (
       <Fragment>
+        {this.state.checked ? <Highscores/> : null}
         <div className="title-bar navbar navbar-dark bg-dark shadow-sm">
           <h3>.trivia</h3>
+          <label>
+            <Switch onChange={this.handleChange} checked={this.state.checked} />
+          </label>
+          {console.log(this.state.checked)}
         </div>
         <div className="main">
           <section className="jumbotron text-center trivia-field">

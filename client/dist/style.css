@@ -1,13 +1,12 @@
 .title-bar{
   background-color: #333;
   color: white;
+  font-family: 'Ubuntu', sans-serif;
   /* overflow: hidden; */
   /* padding: 0px 16px !important; */
   /* margin: 0 !important; */
   text-decoration: none;
   /* font-size: 17px; */
-  animation-name: bar;
-  animation-duration: 0.4s;
 }
 
 .trivia-field{
@@ -18,11 +17,8 @@
   padding-bottom: 8% !important;
 }
 
-.question{
-  
-}
+
 
 body{
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
-
