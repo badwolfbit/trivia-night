@@ -1,5 +1,7 @@
 # trivia
 
+![trivia-mainpage](documentation/image-assets/2019-04-01%2011.18.29.gif)
+
 Trivia game web application designed as a full-stack service and includes a database, web server, RESTful API.
 
 Open Trivia Database JSON API: https://opentdb.com/
