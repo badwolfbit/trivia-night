@@ -38,6 +38,8 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "compression-webpack-plugin": "^2.0.0",
+    "tslint": "^5.15.0",
+    "tslint-react": "^4.0.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
   }
