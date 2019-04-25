@@ -9,7 +9,7 @@ Open Trivia Database JSON API: https://opentdb.com/
 ### Tech Stack
 - [Node.js](https://nodejs.org/api/ "Node.js") with [Express.js](https://expressjs.com/en/4x/api.html "Express.js") framework
 - [MongoDB](https://docs.mongodb.com/manual/ "MongoDB") database
-- [React](https://reactjs.org/docs/getting-started.html "React") front-end framework
+- [React](https://reactjs.org/docs/getting-started.html "React") front-end library
 
 ### Getting Started
 - `mongod`
