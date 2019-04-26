@@ -18,7 +18,7 @@ var mongodb = require("mongodb");
 app.use(cors());
 app.use(parser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/../client/dist"));
+app.use(express.static(__dirname + "/client/dist"));
 
 // MongoClient.connect(
 //   url,
@@ -93,7 +93,7 @@ let shuffle = function(array) {
 
 // other endpoints for react-routers
 app.get('/*', (req,res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+  res.sendFile(path.join(__dirname, '/client/dist/index.html'), (err) => {
     if(err){
       res.status(500).send(err)
     }

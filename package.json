@@ -4,8 +4,8 @@
   "description": "jeopardy style game w/ multiple players",
   "main": "index.js",
   "scripts": {
-    "server-dev": "nodemon server/index.js",
-    "server-prod": "node server/index.js",
+    "server-dev": "nodemon app.js",
+    "server-prod": "node app.js",
     "react-dev": "webpack -d --watch",
     "build": "webpack --mode \"production\""
   },
