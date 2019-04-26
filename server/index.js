@@ -3,12 +3,11 @@ const axios = require("axios");
 const parser = require("body-parser");
 const cors = require("cors");
 var assert = require("assert");
+const path = require("path");
 const app = express();
 
 const Entities = require('html-entities').XmlEntities;
 const entities = new Entities();
-
-
 
 // MongoDB
 var MongoClient = require("mongodb").MongoClient;
@@ -17,20 +16,21 @@ var mongodb = require("mongodb");
 
 // Middleware
 app.use(cors());
-app.use(express.static(__dirname + "/../client/dist"));
 app.use(parser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/../client/dist"));
 
-MongoClient.connect(
-  url,
-  {
-    poolSize: 20,
-    useNewUrlParser: true
-  },
-  function(err, db) {
-    assert.equal(null, err);
-    mongodb = db;
-  }
-);
+// MongoClient.connect(
+//   url,
+//   {
+//     poolSize: 20,
+//     useNewUrlParser: true
+//   },
+//   function(err, db) {
+//     assert.equal(null, err);
+//     mongodb = db;
+//   }
+// );
 
 // compression bundle
 app.get("*.js", function(req, res, next) {
@@ -91,6 +91,15 @@ let shuffle = function(array) {
   return array;
 };
 
+// other endpoints for react-routers
+app.get('/*', (req,res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+    if(err){
+      res.status(500).send(err)
+    }
+  })
+})
+
 // database
 
 // get user wins
@@ -119,7 +128,7 @@ app.post("/post", (req, res) => {
   });
 });
 
-let port = 4000;
+let port = process.env.PORT || 4000;
 app.listen(port, function() {
   console.log(`listening on port ${port}`);
 });
