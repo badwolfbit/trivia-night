@@ -12,6 +12,14 @@ Open Trivia Database JSON API: https://opentdb.com/
 - [React](https://reactjs.org/docs/getting-started.html "React") front-end library
 
 ### Getting Started
-- `mongod`
-- `npm run server-dev`
-- `npm run build`
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
