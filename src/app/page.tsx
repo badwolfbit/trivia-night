@@ -4,14 +4,14 @@
 // TODO: redis cache for triviaDB
 
 // import { createContext, useContext, useState } from "react";
-import header from '@/app/components/header';
+import Navbar from '@/app/components/navbar';
 
 
 export default function Home() {
 
   return (
     <div>
-      <header />
+      <Navbar />
       <h1>Trivia Night</h1>
     </div>
   );
