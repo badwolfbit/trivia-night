@@ -1,3 +1,4 @@
+// TODO: fetch from database and display highscores
 export default async function highscoresPage() {
   return (
     <div>

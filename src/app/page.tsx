@@ -2,17 +2,18 @@
 // TODO: triviaQuestion & triviaAnswer components
 // TODO: triviaDB API call
 // TODO: redis cache for triviaDB
+'use client';
 
 // import { createContext, useContext, useState } from "react";
 import Navbar from '@/app/components/navbar';
-
 
 export default function Home() {
 
   return (
     <div>
       <Navbar />
-      <h1>Trivia Night</h1>
+      {/* Question Component */}
+      {/* multiple choice Component */}
     </div>
   );
 }
