@@ -19,7 +19,7 @@ import {
 export function ModeToggle() {
   const { setTheme } = useTheme()
 
-// TODO: make dropdown into simple slider button for dark/light mode
+  // TODO: make dropdown into simple slider button for dark/light mode
   
   return (
     <DropdownMenu>
