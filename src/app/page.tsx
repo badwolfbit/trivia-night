@@ -1,9 +1,9 @@
 // TODO: navbar from previous & darkmode/lightmode toggle
-// shadcn/ui darkmode w/ toggle
 // TODO: triviaQuestion & triviaAnswer components
 // shadcn/ui components 
 // TODO: triviaDB API call
 // TODO: redis cache for triviaDB
+
 'use client';
 
 // import { createContext, useContext, useState } from "react";

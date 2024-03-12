@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 // shadcn/ui style additions
-import { Inter as FontSans } from "next/font/google"
 import { cn } from "@/lib/utils"
+import { Inter as FontSans } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider";
 
 // shadcn/ui font
